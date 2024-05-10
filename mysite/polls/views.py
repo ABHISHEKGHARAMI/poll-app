@@ -10,5 +10,4 @@ def index(request):
 
 
 def detail(request,question_id):
-    response = "you are looking at the result of the question %s."
-    return HttpResponse(response % question_id)
+    return HttpResponse("You're looking at the question %s"%question_id)
