@@ -9,7 +9,7 @@ from .models import Questions
 
 def index(request):
     latest_question_list = Questions.objects.order_by('-pub_date')[:5]
-    output = "".join([q.question_text for q in latest_question_list] )
+    output = ", ".join([q.question_text for q in latest_question_list] )
     return HttpResponse(output)
 
 
