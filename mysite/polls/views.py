@@ -44,6 +44,7 @@ def votes(request,question_id):
     questions = get_object_or_404(Questions,pk=question_id)
     try:
         selected_choice = questions.choice_set.get(pk = request.POST['choice'])
+        print(selected_choice)
     except (KeyError,Choice.DoesNotExist):
         return render(
             request,
