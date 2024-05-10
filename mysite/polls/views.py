@@ -8,6 +8,7 @@ from .models import Questions, Choice
 from django.template import loader
 from django.shortcuts import get_object_or_404
 from django.urls import reverse
+from . import views
 
 
 def index(request):
@@ -28,11 +29,11 @@ def detail(request,question_id):
     })
 
 
-def results(request,question_id):
+def result(request,question_id):
     questions  = get_object_or_404(Questions,pk = question_id)
     return render(
         request,
-        'polls/result.html',
+        "polls/result.html",
         {
             'questions': questions
         }
@@ -46,7 +47,7 @@ def votes(request,question_id):
     except (KeyError,Choice.DoesNotExist):
         return render(
             request,
-            'polls/detail.html',
+            "polls/detail.html",
             {
                 'questions' : questions,
                 'error_message' : "you didn't select a choice" 
@@ -57,6 +58,4 @@ def votes(request,question_id):
         selected_choice.votes = F('votes') + 1
         selected_choice.save()
         
-        return HttpResponseRedirect(
-            reverse('polls:result',args=(questions.id, ))
-        )
+        return HttpResponseRedirect(reverse("polls:results", args=(questions.id,)))
