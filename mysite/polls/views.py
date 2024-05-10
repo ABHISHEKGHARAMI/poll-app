@@ -6,6 +6,7 @@ from django.http import HttpResponse
 
 from .models import Questions
 from django.template import loader
+from django.shortcuts import get_object_or_404
 
 
 def index(request):
@@ -20,7 +21,10 @@ def index(request):
 
 
 def detail(request,question_id):
-    return HttpResponse("You're looking at the question %s" %question_id)
+    questions = get_object_or_404(Questions,pk=question_id)
+    return render(request,'polls/detail.html',{
+        'questions' : questions
+    })
 
 
 def results(request,question_id):
