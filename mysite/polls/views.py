@@ -2,7 +2,7 @@ from django.shortcuts import render
 
 # Create your views here.
 
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 
 from .models import Questions, Choice
 from django.template import loader
@@ -57,6 +57,6 @@ def votes(request,question_id):
         selected_choice.votes = F('votes') + 1
         selected_choice.save()
         
-        return HttpResponse(
-            reverse('polls:result',args=(questions.id))
+        return HttpResponseRedirect(
+            reverse('polls:result',args=(questions.id, ))
         )
