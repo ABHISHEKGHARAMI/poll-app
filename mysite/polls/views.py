@@ -23,9 +23,9 @@ def index(request):
 
 
 def detail(request,question_id):
-    questions = get_object_or_404(Questions,pk=question_id)
+    question = get_object_or_404(Questions,pk=question_id)
     return render(request,'polls/detail.html',{
-        'questions' : questions
+        'question' : question
     })
 
 
