@@ -4,7 +4,7 @@ from django.shortcuts import render
 
 from django.http import HttpResponse, HttpResponseRedirect
 
-from .models import Questions, Choice
+from .models import Question, Choice
 from django.template import loader
 from django.shortcuts import get_object_or_404
 from django.urls import reverse
@@ -12,7 +12,7 @@ from . import views
 
 
 def index(request):
-    latest_question_list = Questions.objects.order_by('-pub_date')[:5]
+    latest_question_list = Question.objects.order_by('-pub_date')[:5]
    
     
     context = {
@@ -30,7 +30,7 @@ def detail(request,question_id):
 
 
 def result(request,question_id):
-    questions  = get_object_or_404(Questions,pk = question_id)
+    questions  = get_object_or_404(Question,pk = question_id)
     return render(
         request,
         "polls/result.html",
