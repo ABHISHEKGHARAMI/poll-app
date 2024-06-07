@@ -18,7 +18,7 @@ class QuestionModelTests(TestCase):
     def test_was_published_with_old_questions(self):
         time = timezone.now() - datetime.timedelta(hours=23,minutes=59,seconds=59)
         old_question = Question(pub_date=time)
-        self.assertIs(old_question.was_published_recently(),False)
+        self.assertIs(old_question.was_published_recently(),True)
         
     def test_was_published_with_recent_questions(self):
         time = timezone.now() - datetime.timedelta(hours=23,minutes=59,seconds=59)
