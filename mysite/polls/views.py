@@ -3,7 +3,8 @@ from django.shortcuts import render
 # Create your views here.
 
 from django.http import HttpResponse, HttpResponseRedirect
-
+from django.db.models import  F
+from django.views import generic
 from .models import Question, Choice
 from django.template import loader
 from django.shortcuts import get_object_or_404
