@@ -61,7 +61,19 @@ class QuestionIndexViewTests(TestCase):
         response = self.client.get(reverse("polls:index"))
         self.assertQuerysetEqual(response.context["latest_question_list"],[question1,question2],)
         
-    
+        
+        
+        
+class DetailTestView(TestCase):
+    def test_future_questions(self):
+        future_question = create_Question(question_text="Future question.",days=5)
+        
+        url = reverse("polls:detail",args=(future_question.id,))   
+        response = self.client.get(url)
+        
+        self.assertEqual(response.status_code,404)
+        
+        
         
         
        
