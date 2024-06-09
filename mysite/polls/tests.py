@@ -74,6 +74,14 @@ class DetailTestView(TestCase):
         self.assertEqual(response.status_code,404)
         
         
+    def past_questions(self):
+        past_question = create_Question(question_text="past question.",days=-5)
+        url = reverse("polls:detail",args=(past_question.id))
+        response = self.client.get(url)
+        
+        self.assertContains(response,past_question.question_text)
+        
+        
         
         
        
