@@ -13,6 +13,7 @@ from . import views
 from django.utils import timezone
 
 
+
 # using the generic views for the django
 class IndexView(generic.ListView):
     template_name = "polls/index.html"
