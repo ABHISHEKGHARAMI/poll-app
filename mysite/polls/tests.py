@@ -38,3 +38,15 @@ class QuestionIndexViewTests(TestCase):
         self.assertContains(response,"No polls available")
         self.assertQuerysetEqual(response.context["latest_question_list"],[])
         
+    def test_past_questions(self):
+        question = create_Question(question_text="past questions",days=-30)
+        response = client.get(reverse("polls:index"))
+        self.assertQuerysetEqual(response.context["latest_question_list"],[question],)
+        
+    def test_future_questions(self):
+        question = create_Question(question_text="future questions",days=30)
+        response = client.get(reverse("polls:index"))
+        self.assertQuerysetEqual(response.context["latest_question_list"],[],) 
+        
+        
+       
